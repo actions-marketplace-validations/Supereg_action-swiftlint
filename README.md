@@ -11,28 +11,38 @@ name: SwiftLint
 
 on:
   pull_request:
-    paths:
-      - '.github/workflows/swiftlint.yml'
-      - '.swiftlint.yml'
-      - '**/*.swift'
 
 jobs:
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: Supereg/action-swiftlint@v4
+```
+
+### Supply arguments
+```yaml
       - name: GitHub Action for SwiftLint with --strict
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: Supereg/action-swiftlint@v4
         with:
           args: --strict
+```
+
+### Only apply to changed files in PR
+
+```yaml
       - name: GitHub Action for SwiftLint (Only files changed in the PR)
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: Supereg/action-swiftlint@v4
         env:
           DIFF_BASE: ${{ github.base_ref }}
+```
+
+### Modify the working directory
+
+```yaml
       - name: GitHub Action for SwiftLint (Different working directory)
-        uses: norio-nomura/action-swiftlint@3.2.1
+        uses: Supereg/action-swiftlint@v4
         env:
           WORKING_DIRECTORY: Source
 ```
@@ -43,12 +53,14 @@ jobs:
 - Since 3.0.0, `GITHUB_TOKEN` is no longer needed.
 
 ## Example
-[Here](https://github.com/norio-nomura/test-action-swiftlint/pull/1/files) is an example that actually works.
+
+Below is an image how this action might look like in your PR!
+
 ![screenshot](screenshot.png)
 
 ## Author
 
-Norio Nomura
+Andreas Bauer
 
 ## License
 
